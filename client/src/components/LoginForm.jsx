@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Context from '../context/Context'
 
 
 const LoginForm = () => {
 
     const navigate = useNavigate();
+    const [pending, setPending] = useState(false);
 
     const context = useContext(Context);
     const [user, setUser] = useState({
@@ -32,7 +34,13 @@ const LoginForm = () => {
 
     const handleLogin = async(e) =>{
        e.preventDefault();
-        const {data} = await axios.post("http://localhost:8000/auth/login", user);
+        setPending(true);
+        const {data} = await toast.promise(axios.post("http://localhost:8000/auth/login", user), {
+            pending: "Getting Details...",
+            success: "Login Successfull",
+            error: "Invalid Credentials"
+        });
+        setPending(false);
         context.setUser(data.user)
         localStorage.setItem("jwt", data.token);
         navigate("/");

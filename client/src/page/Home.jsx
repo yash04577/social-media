@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import PostSide from '../components/PostSide'
 import ProfileSide from '../components/ProfileSide'
 import RightSide from '../components/RightSide'
-import TestUpload from '../components/testUpload'
 import Context from '../context/Context'
 import "./home.css"
 
@@ -23,6 +22,7 @@ const Home = () => {
         const { data } = await axios.get(`http://localhost:8000/auth/${localStorage.getItem("jwt")}`);
         console.log(data);
         context.setUser(data);
+        localStorage.setItem("currentUserId", data._id);
       }
       else {
         navigate("/auth")

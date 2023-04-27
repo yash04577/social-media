@@ -79,6 +79,7 @@ const ProfileModal = () => {
 
         if (localStorage.getItem("jwt")) {
             const { data } = await axios.get(`http://localhost:8000/auth/${localStorage.getItem("jwt")}`);
+            delete data.password
             setUserData(data)
             // setUserData({firstname:"yash"})
             setLoading(false);

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import logo from "../assets/images/logo.png"
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
@@ -8,7 +8,6 @@ import Context from '../context/Context'
 const Auth = () => {
 
     const context = useContext(Context);
-
     
 
     return (

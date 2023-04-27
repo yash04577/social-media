@@ -7,9 +7,10 @@ const State = (props) => {
     const [user, setUser] = useState({});
     const [reloadTimeline, setReloadTimeline] = useState(false);
     const [showProfileModel, setShowProfileModel] = useState(false);
+    const [posts, setPosts] = useState([]);
 
   return (
-    <Context.Provider value={{showLogin, setShowLogin, user, setUser, reloadTimeline, setReloadTimeline,showProfileModel, setShowProfileModel}}>
+    <Context.Provider value={{showLogin, setShowLogin, user, setUser, reloadTimeline, setReloadTimeline,showProfileModel, setShowProfileModel, posts, setPosts}}>
         {props.children}
     </Context.Provider>
   )
