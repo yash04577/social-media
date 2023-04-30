@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "nodemon index.js -e js, jsx"
+    "test": "nodemon index.js -e js, jsx",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
