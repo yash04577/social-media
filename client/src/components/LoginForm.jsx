@@ -8,7 +8,6 @@ import Context from '../context/Context'
 const LoginForm = () => {
 
     const navigate = useNavigate();
-    const [pending, setPending] = useState(false);
 
     const context = useContext(Context);
     const [user, setUser] = useState({
@@ -34,15 +33,14 @@ const LoginForm = () => {
 
     const handleLogin = async(e) =>{
        e.preventDefault();
-        setPending(true);
         const {data} = await toast.promise(axios.post("http://localhost:8000/auth/login", user), {
             pending: "Getting Details...",
             success: "Login Successfull",
             error: "Invalid Credentials"
         });
-        setPending(false);
         context.setUser(data.user)
         localStorage.setItem("jwt", data.token);
+        localStorage.setItem("currentUserId", data.user._id)
         navigate("/");
         
     }

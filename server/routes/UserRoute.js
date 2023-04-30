@@ -1,6 +1,6 @@
 import express from "express"
 // import { getUser } from "../controller/UserController";
-import { deleteUser, followUser, getUser, updateUser, unFollowUser } from "../controller/UserController.js";
+import { deleteUser, followUser, getUser, updateUser, unFollowUser, getUserByUsername, getAllUser } from "../controller/UserController.js";
 import multer from "multer"
 
 
@@ -39,6 +39,8 @@ router.post("/", upload.single('myFile') , async(req, res)=>{
 
 
 router.get("/:id", getUser);
+router.get("/", getAllUser);
+router.get("/username/:username", getUserByUsername);
 router.put("/:id", updateUser);
 router.delete("/:id", deleteUser);
 router.put("/:id/follow", followUser);

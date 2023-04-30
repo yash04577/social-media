@@ -7,22 +7,40 @@ import ProfileRight from '../components/ProfileRight'
 import RightSide from '../components/RightSide'
 import Context from '../context/Context'
 import "./home.css"
-// import { useParams } from 'react-router-dom'
-const Profile = () => {
+
+const Profile = ({mode}) => {
 
   const context = useContext(Context);
-  const {id} = useParams();
+  const {id, username} = useParams();
+
   const {showProfileModel} = context
   // window.alert(id);
 
   const getData = async() =>{
+
+    if(mode === "id"){
+
       const {data} = await axios.get(`http://localhost:8000/user/${id}`);
       console.log("profile user ", data)
       context.setUser(data);
-
+  
       const postData = await axios.get(`http://localhost:8000/post/${id}/timeline`);
       context.setPosts(postData.data);
       console.log("profile post ", postData.data)
+    }
+
+    else{
+      console.log("user con");
+      console.log(username)
+      const {data} = await axios.get(`http://localhost:8000/user/username/${username}`);
+      console.log("profile user ", data)
+      context.setUser(data);
+  
+      const postData = await axios.get(`http://localhost:8000/post/${data._id}/timeline`);
+      context.setPosts(postData.data);
+      console.log("profile post ", postData.data)
+    }
+
   }
 
 
@@ -38,7 +56,7 @@ const Profile = () => {
     getData();
   },[])
   return (
-      <div className='home relative'>
+      <div className='home relative sm:flex sm:flex-col'>
           <ProfileLeft/>
           <ProfileRight />
           <RightSide />

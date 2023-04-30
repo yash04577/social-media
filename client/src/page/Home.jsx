@@ -13,21 +13,17 @@ const Home = () => {
   const context = useContext(Context);
 
   const authUser = async () => {
-    if (context.user.username) {
-      console.log("if")
+
+
+    if (localStorage.getItem("jwt")) {
+      const { data } = await axios.get(`http://localhost:8000/auth/${localStorage.getItem("jwt")}`);
+      context.setUser(data);
+      localStorage.setItem("currentUserId", data._id);
     }
     else {
-      console.log("else")
-      if (localStorage.getItem("jwt")) {
-        const { data } = await axios.get(`http://localhost:8000/auth/${localStorage.getItem("jwt")}`);
-        console.log(data);
-        context.setUser(data);
-        localStorage.setItem("currentUserId", data._id);
-      }
-      else {
-        navigate("/auth")
-      }
+      navigate("/auth")
     }
+
   }
 
 

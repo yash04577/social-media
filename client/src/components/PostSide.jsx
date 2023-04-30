@@ -21,7 +21,7 @@ const PostSide = () => {
   },[context.reloadTimeline, context.user])
 
   return (
-    <div className='flex flex-col gap-[1rem] h-screen overflow-auto'>
+    <div className='flex flex-col gap-[1rem] h-screen overflow-auto sm:overflow-x-hidden sm:w-[90vw] sm:text-xs'>
       <PostShare />
 
       {

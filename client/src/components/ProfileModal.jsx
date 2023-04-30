@@ -3,13 +3,13 @@ import {RxCross2} from "react-icons/rx"
 import Context from '../context/Context'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const ProfileModal = () => {
 
-    const navigate = useNavigate();
     const context = useContext(Context);
-    const {showProfileModel, setShowProfileModel} = context;
-    const [loading, setLoading] = useState(true);
+    const {setShowProfileModel} = context;
+    const [loading, setLoading] = useState(false);
     const [userData, setUserData] = useState({
         firstname:"",
         lastname:"",
@@ -28,7 +28,6 @@ const ProfileModal = () => {
             let formData = new FormData();
             formData.append("myFile", e.target.files[0]);
             const {data} = await axios.post(`http://localhost:8000/upload`, formData)
-            console.log("upload res", data)
 
             if(e.target.name == "coverPicture"){
                 picture.coverPicture = data;
@@ -38,7 +37,6 @@ const ProfileModal = () => {
                 picture.profilePicture = data;
             }
 
-            console.log(picture)
         }
     }
 
@@ -69,10 +67,19 @@ const ProfileModal = () => {
             userData.coverPicture = picture.coverPicture;
         }
         
-
-        const {data} = await axios.put(`http://localhost:8000/user/${userData._id}`, userData)
-        console.log(userData);
-        console.log("update res ", data)
+        try {
+            setLoading(true)
+            const {data} = await toast.promise( axios.put(`http://localhost:8000/user/${userData._id}`, userData), {
+            pending:"Updating Details...",
+            error:"Server Error",
+            success:"Details Updated"})
+            setLoading(false);
+            window.location.reload();
+        }
+        catch (error) {
+            console.log("error on profile modal", error);
+        }
+        
     }
 
     const fetchData = async() =>{
@@ -81,45 +88,41 @@ const ProfileModal = () => {
             const { data } = await axios.get(`http://localhost:8000/auth/${localStorage.getItem("jwt")}`);
             delete data.password
             setUserData(data)
-            // setUserData({firstname:"yash"})
-            setLoading(false);
-            console.log(data)
         }
     }
 
     useEffect(()=>{
         fetchData();
-        
     },[])
 
     return (
 
         loading ? <p>Loading</p> :
 
-        <div className='absolute w-screen h-screen '>
-            <div className='bg-[#fff] py-8 px-3 rounded-2xl absolute left-[28%] z-10'>
+        <div className='absolute w-screen h-screen'>
+            <div className='bg-[#fff] w-[50vw] max-w[50vw] py-8 px-3 rounded-2xl absolute left-[22%] z-10 sm:w-[90vw] sm:left-[0px]'>
 
                 <h1 className='font-bold text-center mb-7 text-xl'>Your info</h1>
                 <RxCross2 onClick={()=>setShowProfileModel(false)} className='absolute right-5 top-9 text-2xl cursor-pointer' />
                 <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
-                    <div className='flex gap-2 w-full'>
+                    <div className='flex gap-2 w-full sm:flex-col'>
                         <input onChange={handleChange} value={userData.firstname} type="text" placeholder='First Name' name='firstname' className='p-2 rounded-md' />
                         <input onChange={handleChange} value={userData.lastname} type="text" placeholder='LastName' name='lastname' className='p-2 rounded-md w-full' />
                     </div>
                     <input onChange={handleChange} value={userData.about} type="text" placeholder='About' name='about' className='p-2 rounded-md' />
-                    <div className='flex gap-2'>
+                    <div className='flex gap-2 sm:flex-col'>
                         <input onChange={handleChange} value={userData.relationship} type="text" placeholder='Relationship' name='relationship' className='p-2 rounded-md' />
                         <input onChange={handleChange} value={userData.worksAt} type="text" placeholder='Works at' name='worksAt' className='p-2 rounded-md w-full' />
                     </div>
                     <input onChange={handleChange} value={userData.livesin} type="text" placeholder='Address' name='livesin' className='p-2 rounded-md' />
-                    <div className='flex gap-4 mt-3'>
+                    <div className='flex gap-4 mt-3 sm:flex-col'>
                         <div>
                             <p>Profile image</p>
-                            <input onChange={handleImg} value={picture.profilePicture} type="file" name="profilePicture" id="" />
+                            <input onChange={handleImg} value={picture.profilePicture} type="file" name="profilePicture" id="" className='sm:w-full' />
                         </div>
                         <div>
                             <p>Cover image</p>
-                            <input onChange={handleImg} value={picture.coverPicture} type="file" name="coverPicture" id="" />
+                            <input onChange={handleImg} value={picture.coverPicture} type="file" name="coverPicture" id="" className='sm:w-full'/>
                         </div>
                     </div>
                     <div className='flex justify-center items-center gap-4 mt-3'>

@@ -6,7 +6,7 @@ import ProfileModal from './ProfileModal'
 
 const ProfileSide = () => {
   return (
-    <div className='flex flex-col gap-[1rem] items-center'>
+    <div className='flex flex-col gap-[1rem] items-center sm:hidden'>
 
         {/* <ProfileModal /> */}
         <LogoSearch />

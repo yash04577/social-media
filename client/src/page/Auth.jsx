@@ -12,7 +12,7 @@ const Auth = () => {
 
     return (
         <div className='flex items-center justify-center h-screen gap-[4rem] relative'>
-            <div className='flex gap-7'>
+            <div className='flex gap-7 sm:hidden'>
                 <img src={logo} alt="" />
                 <div>
                     <h1 className='font-bold text-2xl'>ZKC Media</h1>

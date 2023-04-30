@@ -93,7 +93,7 @@ const PostShare = () => {
                                 <p>Shedule</p>
                             </div>
                             <div>
-                                <button type='submit' className='bg-orange px-5 py-1 rounded-lg'>Share</button>
+                                <button type='submit' className='bg-orange px-5 py-1 rounded-lg hover:bg-[#fff] hover:border-2 hover:border-orange'>Share</button>
                             </div>
                             <input type="file" ref={imgRef} name="myFile" className='hidden' onChange={imgChangeHandler} />
                         </div>

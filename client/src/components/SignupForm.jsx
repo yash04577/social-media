@@ -42,7 +42,7 @@ const SignupForm = () => {
                     success: "User Registered Successfull",
                     error: "Invalid Credentials"
                 });
-                navigate("/");
+                navigate("/auth");
             } catch (error) {
                 console.log(error)
             }
@@ -59,15 +59,15 @@ const SignupForm = () => {
 
 
     return (
-        <div className='bg-cardColor py-4 px-3 rounded-2xl'>
+        <div className='bg-cardColor py-4 px-3 rounded-2xl sm:w-[90vw]'>
             <h1 className='font-bold text-center mb-7 text-xl'>Sign up</h1>
             <form onSubmit={handleSignup} className='flex flex-col gap-2'>
-                <div className='flex gap-2'>
+                <div className='flex gap-2 sm:flex-col'>
                     <input name='firstname' onChange={changeHandler} type="text" placeholder='First Name' className='p-2 rounded-md' />
                     <input name='lastname' onChange={changeHandler} type="text" placeholder='LastName' className='p-2 rounded-md' />
                 </div>
                 <input name='username' onChange={changeHandler} type="text" placeholder='Username' className='p-2 rounded-md' />
-                <div className='flex gap-2'>
+                <div className='flex gap-2 sm:flex-col'>
                     <input name='password' onChange={changeHandler} type="text" placeholder='Password' className='p-2 rounded-md' />
                     <input name='confirmPassword' onChange={changeHandler} type="text" placeholder='Confirm Password' className='p-2 rounded-md' />
                 </div>

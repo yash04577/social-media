@@ -9,7 +9,7 @@ const Post = (props) => {
     <div className='bg-cardColor rounded-2xl px-3 py-3'>
         {
           props.data.image &&
-          <img src={`http://localhost:8000/images/${props.data.image}`} className='w-full max-h-[32rem] object-cover rounded-2xl'/>
+          <img src={`http://localhost:8000/images/${props.data.image}`} className='w-full object-cover rounded-2xl'/>
         }
         <div className='flex gap-5 text-2xl pt-3'>
             <AiFillHeart />

@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import {BiPencil} from "react-icons/bi"
 import { useNavigate } from 'react-router-dom';
 import Context from '../context/Context';
+import { Link } from 'react-router-dom';
 
 const InfoCard = () => {
 
@@ -11,7 +12,7 @@ const InfoCard = () => {
 
 
     const logoutHandler = async() =>{
-        localStorage.removeItem("jwt");
+        localStorage.clear();
         navigate("/auth");
     }
 
@@ -22,7 +23,7 @@ const InfoCard = () => {
             <span>Your Info</span>
             {
                 user?._id == localStorage.getItem("currentUserId") &&
-                <BiPencil onClick={()=>setShowProfileModel(true)}/>
+                <BiPencil onClick={()=>setShowProfileModel(true)} className='cursor-pointer'/>
             }
         </div>
         <div>
@@ -38,7 +39,11 @@ const InfoCard = () => {
             <span>{user?.worksAt}</span>
         </div>
         <div className='w-full mt-4'>
-            <button onClick={logoutHandler} className='bg-orange w-full py-3 rounded-xl'>Logout</button>
+            {
+                user?._id == localStorage.getItem("currentUserId") ?
+                <button onClick={logoutHandler} className='bg-orange w-full py-3 rounded-xl hover:bg-[#fff] hover:border-2 hover:border-orange'>Logout</button> :
+                <Link to="/" className='bg-orange w-full py-3 rounded-xl px-6 hover:bg-[#fff] hover:border-2 hover:border-orange'>Home</Link>
+            }
         </div>
     </div>
 

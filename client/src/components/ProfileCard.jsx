@@ -13,10 +13,10 @@ const ProfileCard = () => {
 
    
   return (
-      <div className='rounded-[1.5rem] flex flex-col relative gap-[1rem] overflow-hidden bg-cardColor pb-2'>
+      <div className='rounded-[1.5rem] flex flex-col relative gap-[1rem] overflow-hidden bg-cardColor pb-2 min-w-[280px]'>
         <div className='flex relative flex-col justify-center items-center'>
-            <img src={`http://localhost:8000/images/${user?.coverPicture}` ?? cover} alt="" className='w-full'/>
-            <img src={`http://localhost:8000/images/${user?.profilePicture}` ?? profile} alt="" className='w-[6rem] rounded-[50%] absolute bottom-[-3rem]'/>
+            <img src={`http://localhost:8000/images/${user?.coverPicture}` } alt="" className='w-full'/>
+            <img src={`http://localhost:8000/images/${user?.profilePicture}`} alt="" className='w-[6rem] rounded-[50%] absolute bottom-[-3rem]'/>
         </div>
 
         <div className='flex flex-col items-center mt-[3rem] gap-[10px]'>

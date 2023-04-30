@@ -19,6 +19,45 @@ export const getUser = async(req, res)=>{
     }
 }
 
+export const getAllUser = async(req, res) =>{
+    try{
+        const users = await userModel.find({});
+        if(users){
+        
+            // const {password, ...otherDetails} = user._doc;
+            // res.status(200).json(otherDetails)
+            res.status(200).json(users)
+        }
+        else{
+            res.status(404).json("no user found")
+        }
+    }
+    catch(err){
+        res.status(500).json({message: err});
+    }
+}
+
+export const getUserByUsername = async(req, res)=>{
+    const username = req.params.username;
+    console.log("username ", username)
+    try{
+        const user = await userModel.findOne({username:username});
+        if(user){
+        
+            const {password, ...otherDetails} = user._doc;
+            console.log("username detail ", user)
+            res.status(200).json(otherDetails)
+        }
+        else{
+            console.log("username detail not found")
+            res.status(404).json("no user found")
+        }
+    }
+    catch(err){
+        res.status(500).json({message: err});
+    }
+}
+
 export const updateUser = async(req, res) =>{
     const id = req.params.id;
     const {currentUserId, currentUserAdminStatus, password} = req.body;
