@@ -10,8 +10,16 @@ import cors from "cors"
 import path from "path"
 import { fileURLToPath } from "url"
 import UploadController from "./controller/UploadController.js"
- const __filename = fileURLToPath(import.meta.url);
- const __dirname = path.dirname(__filename)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename)
+
+import fs from "fs";
+
+const uploadsDir = path.join(__dirname, 'uploads');
+
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir);
+}
 
 const app = express();
 app.use(cors());
