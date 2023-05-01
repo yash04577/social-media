@@ -34,8 +34,14 @@ const PostShare = () => {
             formData.append("myFile", image)
             formData.append("userId", context.user._id)
             formData.append("desc", postDesc)
+            formData.append("name", context.user.firstname)
+            formData.append("profilePicture", context.user.profilePicture)
+
+            console.log("formData ", formData)
+
             try {
                 const res = await axios.post("http://localhost:8000/post", formData);
+                // const res = await axios.post("https://social-media-yash.vercel.app/post", formData);
                 if(res.status == 200){
                     toast.success("post created")
                     setImage();
@@ -53,6 +59,7 @@ const PostShare = () => {
                 desc:postDesc
             }
             const res = await axios.post("http://localhost:8000/post", newPost);
+            // const res = await axios.post("https://social-media-yash.vercel.app/post", newPost);
             if(res.status == 200){
                 toast.success("post created")
                 setImage();
@@ -84,7 +91,7 @@ const PostShare = () => {
                                 <BsPlayCircle />
                                 <p>Video</p>
                             </div>
-                            <div className='flex items-center gap-1'>
+                            <div className='flex items-center gap-1 sm:hidden'>
                                 <GoLocation />
                                 <p>Loaction</p>
                             </div>

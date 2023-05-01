@@ -38,6 +38,7 @@ const SignupForm = () => {
 
             try {
                 const { data } = await toast.promise(axios.post("http://localhost:8000/auth/register", user), {
+                // const { data } = await toast.promise(axios.post("https://social-media-yash.vercel.app/auth/register", user), {
                     pending: "Getting Details...",
                     success: "User Registered Successfull",
                     error: "Invalid Credentials"

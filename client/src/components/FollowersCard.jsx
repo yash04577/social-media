@@ -18,6 +18,7 @@ const FollowersCard = () => {
     const getFollwer = async(id) =>{
 
         const {data} = await axios.get(`http://localhost:8000/user/${id}`)
+        // const {data} = await axios.get(`https://social-media-yash.vercel.app//user/${id}`)
         setFollowers(prev=>
             [
                 ...prev,
@@ -38,20 +39,41 @@ const FollowersCard = () => {
         })
 
         const {data} = await axios.get(`http://localhost:8000/user`)
+        // const {data} = await axios.get(`https://social-media-yash.vercel.app/user`)
         setAllUser(data);
 
     }
 
 
     const handleFollow = async(id) =>{
-        const {data} = await axios.put(`http://localhost:8000/user/${id}/follow`, {currentUserId:localStorage.getItem("currentUserId")})
+        
+        const {data} = await toast.promise( axios.put(`http://localhost:8000/user/${id}/follow`, {currentUserId:localStorage.getItem("currentUserId")}), {
+            pending:"Following User please wait...",
+            success:"User Followed",
+            error:"Server Error"
+        })
+        // const {data} = await axios.put(`https://social-media-yash.vercel.app/user/${id}/follow`, {currentUserId:localStorage.getItem("currentUserId")})
+
+
+        const data2 = await axios.get(`http://localhost:8000/auth/${localStorage.getItem("jwt")}`);
+        context.setUser(data2.data);
+
         toast.success("User Followed")
         
         
     }
 
     const handleUnfollow = async(id) =>{
-        const {data} = await axios.put(`http://localhost:8000/user/${id}/unfollow`, {currentUserId:localStorage.getItem("currentUserId")})
+        const {data} = await toast.promise( axios.put(`http://localhost:8000/user/${id}/unfollow`, {currentUserId:localStorage.getItem("currentUserId")}), {
+            pending:"Unfollowing User please wait...",
+            success:"User Unfollowed",
+            error:"Server Error"
+        })
+        // const {data} = await axios.put(`https://social-media-yash.vercel.app/user/${id}/unfollow`, {currentUserId:localStorage.getItem("currentUserId")})
+
+
+        const data2 = await axios.get(`http://localhost:8000/auth/${localStorage.getItem("jwt")}`);
+        context.setUser(data2.data);
         toast.success("User Unfollowed")
     
     }
@@ -60,7 +82,7 @@ const FollowersCard = () => {
 
     useState(()=>{
         getData();
-    }, )
+    }, context.user)
 
   return (
     <div>
@@ -77,6 +99,7 @@ const FollowersCard = () => {
                                 {
                                     follower.profilePicture ? 
                                     <img src={`http://localhost:8000/images/${follower.profilePicture}` } className='w-[3.5rem] rounded-[50%] h-[3.5rem]' /> 
+                                    // <img src={`https://social-media-yash.vercel.app/images/${follower.profilePicture}` } className='w-[3.5rem] rounded-[50%] h-[3.5rem]' /> 
                                     : <FaUserAlt className='w-[3.5rem] rounded-[50%] h-[3.5rem]' />
                                 }
                                 {/* <img src={`http://localhost:8000/images/${follower.profilePicture}` ?? <FaUserAlt />} className='w-[3.5rem] rounded-[50%] h-[3.5rem]' /> */}

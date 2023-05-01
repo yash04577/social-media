@@ -19,7 +19,8 @@ const TestUpload = () => {
         let formData = new FormData();
         formData.append("myFile", image)
         // const res = await axios.post("http://localhost:8000/upload", formData);
-        const res = await axios.post("http://localhost:8000/post/", formData);
+        // const res = await axios.post("http://localhost:8000/post/", formData);
+        const res = await axios.post("https://social-media-yash.vercel.app/post/", formData);
         console.log(res);
 
     }

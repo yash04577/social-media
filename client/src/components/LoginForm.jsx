@@ -34,6 +34,7 @@ const LoginForm = () => {
     const handleLogin = async(e) =>{
        e.preventDefault();
         const {data} = await toast.promise(axios.post("http://localhost:8000/auth/login", user), {
+        // const {data} = await toast.promise(axios.post("https://social-media-yash.vercel.app/auth/login", user), {
             pending: "Getting Details...",
             success: "Login Successfull",
             error: "Invalid Credentials"

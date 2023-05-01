@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 import PostSide from '../components/PostSide'
 import ProfileSide from '../components/ProfileSide'
 import RightSide from '../components/RightSide'
@@ -17,6 +18,7 @@ const Home = () => {
 
     if (localStorage.getItem("jwt")) {
       const { data } = await axios.get(`http://localhost:8000/auth/${localStorage.getItem("jwt")}`);
+      // const { data } = await axios.get(`https://social-media-yash.vercel.app/auth/${localStorage.getItem("jwt")}`);
       context.setUser(data);
       localStorage.setItem("currentUserId", data._id);
     }
@@ -37,6 +39,7 @@ const Home = () => {
         (context.user.username &&
 
           <>
+            {/* <Navbar /> */}
             <ProfileSide />
             <PostSide />
             <RightSide />

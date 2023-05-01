@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import {RxCross2} from "react-icons/rx"
 import Context from '../context/Context'
 import axios from "axios"
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 const ProfileModal = () => {
@@ -28,6 +27,7 @@ const ProfileModal = () => {
             let formData = new FormData();
             formData.append("myFile", e.target.files[0]);
             const {data} = await axios.post(`http://localhost:8000/upload`, formData)
+            // const {data} = await axios.post(`https://social-media-yash.vercel.app/upload`, formData)
 
             if(e.target.name == "coverPicture"){
                 picture.coverPicture = data;
@@ -70,6 +70,7 @@ const ProfileModal = () => {
         try {
             setLoading(true)
             const {data} = await toast.promise( axios.put(`http://localhost:8000/user/${userData._id}`, userData), {
+            // const {data} = await toast.promise( axios.put(`https://social-media-yash.vercel.app/user/${userData._id}`, userData), {
             pending:"Updating Details...",
             error:"Server Error",
             success:"Details Updated"})
@@ -86,6 +87,7 @@ const ProfileModal = () => {
 
         if (localStorage.getItem("jwt")) {
             const { data } = await axios.get(`http://localhost:8000/auth/${localStorage.getItem("jwt")}`);
+            // const { data } = await axios.get(`https://social-media-yash.vercel.app/auth/${localStorage.getItem("jwt")}`);
             delete data.password
             setUserData(data)
         }

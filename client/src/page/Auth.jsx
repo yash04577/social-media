@@ -1,8 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext} from 'react'
 import logo from "../assets/images/logo.png"
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
-import TestUpload from '../components/testUpload';
 import Context from '../context/Context'
 
 const Auth = () => {
