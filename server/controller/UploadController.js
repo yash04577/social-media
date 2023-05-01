@@ -29,7 +29,7 @@ router.post("/", upload.single('myFile') , async(req, res)=>{
         }
         
     } catch (error) {
-        res.status(500).json(error)
+        res.status(500).json({test:"checking", err:error})
     }
 })
 
