@@ -57,5 +57,5 @@ io.on('connection', (socket) => {
 
 
 http.listen(PORT, () => {
-  console.log('Server listening on port 3001');
+  console.log(`Server listening on port ${PORT}`);
 });

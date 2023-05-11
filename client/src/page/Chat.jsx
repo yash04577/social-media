@@ -49,7 +49,8 @@ function ChatApp() {
     setSelectedChatMessage(data);
   }
 
-  const socket = io('ws://localhost:3001');
+  // const socket = io('ws://localhost:3001');
+  const socket = io('https://media-socket.onrender.com/');
   const sendMessage = async () => {
     const chatIdd = await axios.get(`${BaseUrl}/chat/find/${localStorage.getItem("currentUserId")}/${conversationId}`)
     const { data } = await axios.post(`${BaseUrl}/message`, {
