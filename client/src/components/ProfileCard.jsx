@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import BaseUrl from '../BaseUrl';
 import Context from '../context/Context'
 
 const ProfileCard = ({ showPost }) => {
@@ -17,9 +18,9 @@ const ProfileCard = ({ showPost }) => {
     return (
         <div className='rounded-[1.5rem] flex flex-col relative gap-[1rem] overflow-hidden bg-cardColor pb-2 min-w-[280px]'>
             <div className='flex relative flex-col justify-center items-center'>
-                <img src={`http://localhost:8000/images/${user?.coverPicture}`} alt="" className='w-full' />
+                <img src={`${BaseUrl}/images/${user?.coverPicture}`} alt="" className='w-full' />
                 {/* <img src={`https://social-media-yash.vercel.app/images/${user?.coverPicture}` } alt="" className='w-full'/> */}
-                <img src={`http://localhost:8000/images/${user?.profilePicture}`} alt="" className='w-[6rem] rounded-[50%] absolute bottom-[-3rem]' />
+                <img src={`${BaseUrl}/images/${user?.profilePicture}`} alt="" className='w-[6rem] rounded-[50%] absolute bottom-[-3rem]' />
                 {/* <img src={`https://social-media-yash.vercel.app/images/${user?.profilePicture}`} alt="" className='w-[6rem] rounded-[50%] absolute bottom-[-3rem]'/> */}
             </div>
 

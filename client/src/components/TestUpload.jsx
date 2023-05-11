@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useRef, useState } from 'react'
+import BaseUrl from '../BaseUrl';
 
 const TestUpload = () => {
 
@@ -20,7 +21,7 @@ const TestUpload = () => {
         formData.append("myFile", image)
         // const res = await axios.post("http://localhost:8000/upload", formData);
         // const res = await axios.post("http://localhost:8000/post/", formData);
-        const res = await axios.post("https://social-media-yash.vercel.app/post/", formData);
+        const res = await axios.post(`${BaseUrl}/post/`, formData);
         console.log(res);
 
     }

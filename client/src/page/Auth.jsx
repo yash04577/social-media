@@ -10,7 +10,7 @@ const Auth = () => {
     
 
     return (
-        <div className='flex items-center justify-center h-screen gap-[4rem] relative'>
+        <div className='flex items-center justify-center h-screen gap-[4rem] relative py-[1rem] px-[1rem]'>
             <div className='flex gap-7 sm:hidden'>
                 <img src={logo} alt="" />
                 <div>

@@ -1,5 +1,4 @@
 import React, { useContext, useRef, useState } from 'react'
-import profileImg from "../assets/images/profileImg.jpg"
 import { IoMdPhotos } from "react-icons/io"
 import { BsPlayCircle } from "react-icons/bs"
 import { GoLocation } from "react-icons/go"
@@ -8,6 +7,7 @@ import { RxCross2 } from "react-icons/rx"
 import axios from 'axios'
 import Context from "../context/Context"
 import { toast } from 'react-toastify'
+import BaseUrl from '../BaseUrl'
 
 
 
@@ -37,10 +37,8 @@ const PostShare = () => {
             formData.append("name", context.user.firstname)
             formData.append("profilePicture", context.user.profilePicture)
 
-            console.log("formData ", formData)
-
             try {
-                const res = await axios.post("http://localhost:8000/post", formData);
+                const res = await axios.post(`${BaseUrl}/post`, formData);
                 // const res = await axios.post("https://social-media-yash.vercel.app/post", formData);
                 if(res.status == 200){
                     toast.success("post created")
@@ -56,9 +54,11 @@ const PostShare = () => {
         else{
             const newPost = {
                 userId:context.user._id, 
-                desc:postDesc
+                desc:postDesc,
+                name: context.user.firstname,
+                profilePicture: context.user.profilePicture
             }
-            const res = await axios.post("http://localhost:8000/post", newPost);
+            const res = await axios.post(`${BaseUrl}/post`, newPost);
             // const res = await axios.post("https://social-media-yash.vercel.app/post", newPost);
             if(res.status == 200){
                 toast.success("post created")
@@ -78,7 +78,7 @@ const PostShare = () => {
 
             <div className='flex flex-col gap-[1rem] bg-cardColor p-[1rem] rounded-[1rem]'>
                 <div className='flex gap-2'>
-                    <img src={profileImg} alt="" className='rounded-[50%] w-[3rem] h-[3rem]' />
+                    <img src={`${BaseUrl}/images/${context.user.profilePicture}`} alt="" className='rounded-[50%] w-[3rem] h-[3rem]' />
                     <div className='w-full flex flex-col gap-3'>
                         <input type="text" placeholder='Whats Happening!' onChange={(e)=>setPostDesc(e.target.value)} name='desc' className='w-full bg-inputColor py-1 px-2 rounded-md' />
                         <div className='flex w-full justify-between'>

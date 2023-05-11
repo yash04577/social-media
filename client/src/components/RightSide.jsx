@@ -4,6 +4,7 @@ import comment from "../assets/images/comment.png"
 import notification from "../assets/images/noti.png"
 import {AiFillSetting} from "react-icons/ai"
 import TrendCard from './TrendCard'
+import { Link } from 'react-router-dom'
 
 const RightSide = () => {
   return (
@@ -12,7 +13,9 @@ const RightSide = () => {
             <img src={home}/>
             <AiFillSetting />
             <img src={notification}/>
-            <img src={comment}/>
+            <Link to={"/chat"}>
+              <img src={comment}/>
+            </Link>
         </div>
         <TrendCard />
         <div className='w-full'>

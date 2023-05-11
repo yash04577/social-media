@@ -1,7 +1,8 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import BaseUrl from '../BaseUrl';
 import Context from '../context/Context'
 
 
@@ -33,8 +34,8 @@ const LoginForm = () => {
 
     const handleLogin = async(e) =>{
        e.preventDefault();
-        const {data} = await toast.promise(axios.post("http://localhost:8000/auth/login", user), {
-        // const {data} = await toast.promise(axios.post("https://social-media-yash.vercel.app/auth/login", user), {
+        // const {data} = await toast.promise(axios.post("http://localhost:8000/auth/login", user), {
+        const {data} = await toast.promise(axios.post(`${BaseUrl}/auth/login`, user), {
             pending: "Getting Details...",
             success: "Login Successfull",
             error: "Invalid Credentials"
@@ -53,7 +54,7 @@ const LoginForm = () => {
             <form onSubmit={handleLogin} className='flex flex-col gap-2'>
 
                 <input type="text" placeholder='Username' className='p-2 rounded-md' name='username' onChange={changeHandler}/>
-                <input type="text" placeholder='Password' className='p-2 rounded-md' name='password' onChange={changeHandler}/>
+                <input type="password" placeholder='Password' className='p-2 rounded-md' name='password' onChange={changeHandler}/>
 
                 <div className='flex justify-center items-center gap-4 mt-3'>
                     <button onClick={handleSwitch} className='text-[#551A8B]'>Don't have an account</button>

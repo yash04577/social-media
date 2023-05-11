@@ -1,0 +1,9 @@
+.my-custom-scroll {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    overflow-y: scroll; /* All other browsers */
+  }
+
+  .my-custom-scroll::-webkit-scrollbar {
+    display: none; /* Chrome and Safari */
+  }

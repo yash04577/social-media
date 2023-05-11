@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import BaseUrl from '../BaseUrl';
 import Context from '../context/Context'
 
 const SignupForm = () => {
@@ -37,7 +38,7 @@ const SignupForm = () => {
         if(user.password === user.confirmPassword){
 
             try {
-                const { data } = await toast.promise(axios.post("http://localhost:8000/auth/register", user), {
+                const { data } = await toast.promise(axios.post(`${BaseUrl}/auth/register`, user), {
                 // const { data } = await toast.promise(axios.post("https://social-media-yash.vercel.app/auth/register", user), {
                     pending: "Getting Details...",
                     success: "User Registered Successfull",
@@ -69,8 +70,8 @@ const SignupForm = () => {
                 </div>
                 <input name='username' onChange={changeHandler} type="text" placeholder='Username' className='p-2 rounded-md' />
                 <div className='flex gap-2 sm:flex-col'>
-                    <input name='password' onChange={changeHandler} type="text" placeholder='Password' className='p-2 rounded-md' />
-                    <input name='confirmPassword' onChange={changeHandler} type="text" placeholder='Confirm Password' className='p-2 rounded-md' />
+                    <input name='password' onChange={changeHandler} type="password" placeholder='Password' className='p-2 rounded-md' />
+                    <input name='confirmPassword' onChange={changeHandler} type="password" placeholder='Confirm Password' className='p-2 rounded-md' />
                 </div>
                 <div className='flex justify-center items-center gap-4 mt-3'>
                     <button onClick={handleSwitch} className='text-[#551A8B]'>Already have an account</button>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import Context from './Context'
 
 const State = (props) => {
@@ -8,9 +8,18 @@ const State = (props) => {
     const [reloadTimeline, setReloadTimeline] = useState(false);
     const [showProfileModel, setShowProfileModel] = useState(false);
     const [posts, setPosts] = useState([]);
+    const [conversationId, setConversationId] = useState("");
 
   return (
-    <Context.Provider value={{showLogin, setShowLogin, user, setUser, reloadTimeline, setReloadTimeline,showProfileModel, setShowProfileModel, posts, setPosts}}>
+    <Context.Provider value={
+      {
+        showLogin, setShowLogin, 
+        user, setUser, 
+        reloadTimeline, setReloadTimeline,
+        showProfileModel, setShowProfileModel, 
+        posts, setPosts, 
+        conversationId, setConversationId
+      }}>
         {props.children}
     </Context.Provider>
   )

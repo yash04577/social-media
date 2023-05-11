@@ -4,6 +4,7 @@ import { AiFillHeart } from "react-icons/ai"
 import { BiCommentDetail } from "react-icons/bi"
 import { FaPaperPlane } from "react-icons/fa"
 import { Link } from 'react-router-dom'
+import BaseUrl from '../BaseUrl'
 import Context from "../context/Context"
 const Post = (props) => {
 
@@ -15,8 +16,8 @@ const Post = (props) => {
   )
 
   const handleLike = async() =>{
-    const {data} = await axios.put(`http://localhost:8000/post/${props.data._id}/like`, {"userId":localStorage.getItem("currentUserId")});
-    const data2 = await axios.get(`http://localhost:8000/post/${context.user._id}/timeline`);
+    const {data} = await axios.put(`${BaseUrl}/post/${props.data._id}/like`, {"userId":localStorage.getItem("currentUserId")});
+    const data2 = await axios.get(`${BaseUrl}/post/${context.user._id}/timeline`);
     // const {data} = await axios.get(`https://social-media-yash.vercel.app/post/${context.user._id}/timeline`);
     context.setPosts(data2.data);
   }
@@ -37,7 +38,7 @@ const Post = (props) => {
         {
           props.data.profilePicture && 
           <Link to={`/profile/${props.data.userId}`}>
-            <img src={`http://localhost:8000/images/${props.data.profilePicture}`} className='w-[50px] h-[50px] rounded-[50%] object-cover' />
+            <img src={`${BaseUrl}/images/${props.data.profilePicture}`} className='w-[50px] h-[50px] rounded-[50%] object-cover' />
           </Link>
         }
         <span className='font-bold'>{props.data.name}</span>
@@ -46,7 +47,7 @@ const Post = (props) => {
 
       {
         props.data.image &&
-        <img src={`http://localhost:8000/images/${props.data.image}`} className='w-full object-cover rounded-2xl' />
+        <img src={`${BaseUrl}/images/${props.data.image}`} className='w-full object-cover rounded-2xl' />
         // <img src={`https://social-media-yash.vercel.app/images/${props.data.image}`} className='w-full object-cover rounded-2xl'/>
       }
       <div className='flex gap-5 text-2xl pt-3'>

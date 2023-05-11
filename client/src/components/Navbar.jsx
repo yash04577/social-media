@@ -25,6 +25,7 @@ const Navbar = () => {
             <Link to={`/profile/${localStorage.getItem("currentUserId")}`}>Profile</Link>
             <Link to={`/profile/${localStorage.getItem("currentUserId")}`}>Followers</Link>
             <Link to={"/"}>Share Post</Link>
+            <Link to={"/chat"}>Chats</Link>
             <Link to={"/"}>Home</Link>
             <Link to={"/auth"}>Logout</Link>
         </div>

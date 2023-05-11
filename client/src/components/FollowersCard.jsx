@@ -4,6 +4,8 @@ import Context from '../context/Context'
 import {FaUserAlt} from "react-icons/fa"
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import BaseUrl from '../BaseUrl';
+
 
 const FollowersCard = () => {
 
@@ -12,13 +14,11 @@ const FollowersCard = () => {
     const [followers, setFollowers] = useState([]);
     const [allUser, setAllUser] = useState([]);
 
-    
-    // const [isFollowing, setIsFollowing] = useState(Boolean);
 
     const getFollwer = async(id) =>{
 
-        const {data} = await axios.get(`http://localhost:8000/user/${id}`)
-        // const {data} = await axios.get(`https://social-media-yash.vercel.app//user/${id}`)
+        // const {data} = await axios.get(`http://localhost:8000/user/${id}`)
+        const {data} = await axios.get(`${BaseUrl}/user/${id}`)
         setFollowers(prev=>
             [
                 ...prev,
@@ -38,8 +38,8 @@ const FollowersCard = () => {
             getFollwer(id);
         })
 
-        const {data} = await axios.get(`http://localhost:8000/user`)
-        // const {data} = await axios.get(`https://social-media-yash.vercel.app/user`)
+        // const {data} = await axios.get(`http://localhost:8000/user`)
+        const {data} = await axios.get(`${BaseUrl}/user`)
         setAllUser(data);
 
     }
@@ -47,7 +47,8 @@ const FollowersCard = () => {
 
     const handleFollow = async(id) =>{
         
-        const {data} = await toast.promise( axios.put(`http://localhost:8000/user/${id}/follow`, {currentUserId:localStorage.getItem("currentUserId")}), {
+        // const {data} = await toast.promise( axios.put(`http://localhost:8000/user/${id}/follow`, {currentUserId:localStorage.getItem("currentUserId")}), {
+        const {data} = await toast.promise( axios.put(`${BaseUrl}/user/${id}/follow`, {currentUserId:localStorage.getItem("currentUserId")}), {
             pending:"Following User please wait...",
             success:"User Followed",
             error:"Server Error"
@@ -55,7 +56,8 @@ const FollowersCard = () => {
         // const {data} = await axios.put(`https://social-media-yash.vercel.app/user/${id}/follow`, {currentUserId:localStorage.getItem("currentUserId")})
 
 
-        const data2 = await axios.get(`http://localhost:8000/auth/${localStorage.getItem("jwt")}`);
+        // const data2 = await axios.get(`http://localhost:8000/auth/${localStorage.getItem("jwt")}`);
+        const data2 = await axios.get(`${BaseUrl}/auth/${localStorage.getItem("jwt")}`);
         context.setUser(data2.data);
 
         toast.success("User Followed")
@@ -64,7 +66,8 @@ const FollowersCard = () => {
     }
 
     const handleUnfollow = async(id) =>{
-        const {data} = await toast.promise( axios.put(`http://localhost:8000/user/${id}/unfollow`, {currentUserId:localStorage.getItem("currentUserId")}), {
+        // const {data} = await toast.promise( axios.put(`http://localhost:8000/user/${id}/unfollow`, {currentUserId:localStorage.getItem("currentUserId")}), {
+        const {data} = await toast.promise( axios.put(`${BaseUrl}/user/${id}/unfollow`, {currentUserId:localStorage.getItem("currentUserId")}), {
             pending:"Unfollowing User please wait...",
             success:"User Unfollowed",
             error:"Server Error"
@@ -72,7 +75,8 @@ const FollowersCard = () => {
         // const {data} = await axios.put(`https://social-media-yash.vercel.app/user/${id}/unfollow`, {currentUserId:localStorage.getItem("currentUserId")})
 
 
-        const data2 = await axios.get(`http://localhost:8000/auth/${localStorage.getItem("jwt")}`);
+        const data2 = await axios.get(`${BaseUrl}/auth/${localStorage.getItem("jwt")}`);
+        // const data2 = await axios.get(`http://localhost:8000/auth/${localStorage.getItem("jwt")}`);
         context.setUser(data2.data);
         toast.success("User Unfollowed")
     
@@ -98,8 +102,8 @@ const FollowersCard = () => {
                             <div className='flex gap-2'>
                                 {
                                     follower.profilePicture ? 
-                                    <img src={`http://localhost:8000/images/${follower.profilePicture}` } className='w-[3.5rem] rounded-[50%] h-[3.5rem]' /> 
-                                    // <img src={`https://social-media-yash.vercel.app/images/${follower.profilePicture}` } className='w-[3.5rem] rounded-[50%] h-[3.5rem]' /> 
+                                    // <img src={`http://localhost:8000/images/${follower.profilePicture}` } className='w-[3.5rem] rounded-[50%] h-[3.5rem]' /> 
+                                    <img src={`${BaseUrl}/images/${follower.profilePicture}` } className='w-[3.5rem] rounded-[50%] h-[3.5rem]' /> 
                                     : <FaUserAlt className='w-[3.5rem] rounded-[50%] h-[3.5rem]' />
                                 }
                                 {/* <img src={`http://localhost:8000/images/${follower.profilePicture}` ?? <FaUserAlt />} className='w-[3.5rem] rounded-[50%] h-[3.5rem]' /> */}

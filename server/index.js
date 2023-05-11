@@ -1,9 +1,7 @@
 import express, { urlencoded } from "express"
 import mongoose from "mongoose"
 import bodyParser from "body-parser"
-// import router from "./routes/AuthRoute";
 import AuthRoute from "./routes/AuthRoute.js"
-// import UserRoute from "./routes/UserRoute.js"
 import UserRoute from "./routes/UserRoute.js"
 import PostRoute from "./routes/PostRoute.js"
 import cors from "cors"
@@ -12,14 +10,9 @@ import { fileURLToPath } from "url"
 import UploadController from "./controller/UploadController.js"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename)
+import chatRoute from "./routes/chatRoute.js"
+import messageRoute from "./routes/messageRoute.js"
 
-import fs from "fs";
-
-const uploadsDir = path.join(__dirname, 'uploads');
-
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir);
-}
 
 const app = express();
 app.use(cors());
@@ -38,6 +31,8 @@ app.use("/auth", AuthRoute);
 app.use("/user", UserRoute);
 app.use("/post", PostRoute)
 app.use("/upload", UploadController);
+app.use("/chat", chatRoute)
+app.use("/message", messageRoute)
 
 app.get("/image/:name", async(req, res)=>{
     const name = req.params.name;
@@ -48,28 +43,3 @@ app.get("/image/:name", async(req, res)=>{
         res.status(404).json(error)
     }
 })
-
-// var storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       cb(null, './uploads') 
-//     },
-//     filename: function (req, file, cb) {
-//       cb(null, `${Date.now()}-${file.originalname}`);
-//     }
-//   })
-   
-// var upload = multer({storage})
-
-
-
-// app.post("/post/", upload.single('myFile') , (req, res)=>{
-//   console.log("inside cons")
-//     const file = req.file
-//     if (!file) {
-//       console.log("if con")
-//       const error = new Error('Please upload a file')
-//       error.httpStatusCode = 400
-//       res.json(error);
-//     }
-//     res.send(file)
-// })

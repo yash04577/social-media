@@ -1,11 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import logo from "../assets/images/logo.png"
 import {AiOutlineSearch} from "react-icons/ai"
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const LogoSearch = () => {
-
-  const [searchParams, setSearchParams] = useSearchParams();
   const [username, setUsername] = useState("");
 
   const changeHandler = (e) =>{

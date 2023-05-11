@@ -1,5 +1,6 @@
 import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
+import BaseUrl from '../BaseUrl'
 import Context from '../context/Context'
 import Post from './Post'
 import PostShare from './PostShare'
@@ -9,7 +10,7 @@ const PostSide = () => {
   const context = useContext(Context);
 
   const getData = async() =>{
-    const {data} = await axios.get(`http://localhost:8000/post/${context.user._id}/timeline`);
+    const {data} = await axios.get(`${BaseUrl}/post/${context.user._id}/timeline`);
     // const {data} = await axios.get(`https://social-media-yash.vercel.app/post/${context.user._id}/timeline`);
     context.setPosts(data);
   }

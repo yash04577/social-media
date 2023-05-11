@@ -1,7 +1,7 @@
 import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import Navbar from '../components/Navbar'
+import React, { useContext, useEffect} from 'react'
+import {useParams} from 'react-router-dom'
+import BaseUrl from '../BaseUrl'
 import ProfileLeft from '../components/ProfileLeft'
 import ProfileModal from '../components/ProfileModal'
 import ProfileRight from '../components/ProfileRight'
@@ -21,12 +21,12 @@ const Profile = ({mode}) => {
 
     if(mode === "id"){
 
-      const {data} = await axios.get(`http://localhost:8000/user/${id}`);
+      const {data} = await axios.get(`${BaseUrl}/user/${id}`);
       // const {data} = await axios.get(`https://social-media-yash.vercel.app/user/${id}`);
       console.log("profile user ", data)
       context.setUser(data);
   
-      const postData = await axios.get(`http://localhost:8000/post/${id}/timeline`);
+      const postData = await axios.get(`${BaseUrl}/post/${id}/timeline`);
       // const postData = await axios.get(`https://social-media-yash.vercel.app/post/${id}/timeline`);
       context.setPosts(postData.data);
       console.log("profile post ", postData.data)
@@ -35,12 +35,12 @@ const Profile = ({mode}) => {
     else{
       console.log("user con");
       console.log(username)
-      const {data} = await axios.get(`http://localhost:8000/user/username/${username}`);
+      const {data} = await axios.get(`${BaseUrl}/user/username/${username}`);
       // const {data} = await axios.get(`https://social-media-yash.vercel.app/user/username/${username}`);
       console.log("profile user ", data)
       context.setUser(data);
   
-      const postData = await axios.get(`http://localhost:8000/post/${data._id}/timeline`);
+      const postData = await axios.get(`${BaseUrl}/post/${data._id}/timeline`);
       // const postData = await axios.get(`https://social-media-yash.vercel.app/post/${data._id}/timeline`);
       context.setPosts(postData.data);
       console.log("profile post ", postData.data)
@@ -61,7 +61,7 @@ const Profile = ({mode}) => {
     getData();
   },[])
   return (
-      <div className='home relative sm:flex sm:flex-col'>
+      <div className='profile relative sm:flex sm:flex-col py-[1rem] px-[1rem]'>
           {/* <Navbar /> */}
           <ProfileLeft/>
           <ProfileRight />
